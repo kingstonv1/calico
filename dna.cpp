@@ -7,7 +7,7 @@ int main()
 {
     std::vector<char> dna;
     std::string input;
-    char inputArr[100];
+    char inputArr[2500000];
     unsigned int cases;
     std::cin >> cases;
     for ( int i {0}; i < (cases + 1); i++ ) 

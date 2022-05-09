@@ -28,12 +28,16 @@ void printFrame( std::vector<std::string> vec )
     int currentSize {0};
     int extra {0};
 
-    for ( int i {0}; i < vec.size(); i++ ) 
+    for ( long unsigned int i {0}; i < vec.size(); i++ ) 
     {
-        if ( vec.at(i).size() > currentSize ) { maxSize = vec.at(i).size(); }
+        if ( vec.at(i).size() > currentSize ) 
+        { 
+            maxSize = vec.at(i).size(); 
+            currentSize = vec.at(i).size();
+        }
     }
 
-    for ( int i {0}; i < vec.size(); i++ ) 
+    for ( long unsigned int i {0}; i < vec.size(); i++ ) 
     {
         temp.push_back(vec.at(i));
     }
@@ -41,25 +45,31 @@ void printFrame( std::vector<std::string> vec )
     vec.clear();
     std::string tempString(maxSize + 2, '*');
     vec.push_back(tempString);
+    vec.push_back("\n");
 
-    for ( int i {0}; i < temp.size(); i++ ) 
+    for ( long unsigned int i {0}; i < temp.size(); i++ ) 
     {
         vec.push_back(temp.at(i));
+        vec.push_back("\n");
     }
 
     //This solution is garbage, but I don't want to use a deque.
 
-    for ( int i {1}; i < vec.size(); i++ ) 
+    for ( long unsigned int i {1}; i < vec.size(); i++ ) 
     {
-        vec.at(i).insert(vec.at(i).begin(), '*');
-        extra = maxSize - vec.at(i).size();
-        std::string temporary(extra - 1, ' ');
-        vec.at(i).append(temporary);
-        vec.at(i).append("*");
+        if ( i % 2 == 0 ) 
+        {
+            extra = (maxSize - vec.at(i).size());
+            extra++;
+            vec.at(i).insert(vec.at(i).begin(), '*');
+            std::string temporary((extra - 1), ' '); 
+            vec.at(i).append(temporary);
+            vec.at(i).append("*");
+        }
     }
     vec.push_back(tempString);
 
-    for ( int i {0}; i < vec.size(); i++ ) 
+    for ( long unsigned int i {0}; i < vec.size(); i++ ) 
     {
         std::cout << vec.at(i);
     }
@@ -70,18 +80,26 @@ int main()
     unsigned int cases {0};
     std::cin >> cases;
 
+    std::cin.clear();
+    std::cin.sync();
+
     std::vector<std::string> inputs;
     std::string input;
     
-    for (int i {0}; i < cases; i++) 
+    for ( long unsigned int i {0}; i < cases; i++) 
     {
         std::getline(std::cin, input);
         inputs.push_back(input);
+        std::cin.clear();
+        std::cin.sync();
     }
 
-    for (int i {0}; i < inputs.size(); i++)  
+    std::cout << "\n";
+
+    for ( long unsigned int i {0}; i < inputs.size(); i++)  
     {
         printFrame(stringSplit(inputs.at(i)));
+        std::cout << "\n\n";
     }
 
     return 0;
