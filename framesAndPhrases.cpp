@@ -80,6 +80,7 @@ int main()
     unsigned int cases {0};
     std::cin >> cases;
 
+    std::cin.ignore(1000, '\n');
     std::cin.clear();
     std::cin.sync();
 
