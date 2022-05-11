@@ -5,7 +5,6 @@
 void flushCin() 
 {
 std::cin.clear();
-fflush(stdin);
 std::cin.ignore(10000, '\n');
 }
 std::string formOutput(std::string student, std::string student2) 
@@ -19,58 +18,68 @@ std::string formOutput(std::string student, std::string student2)
     return temp;
 }
 
+
 int main() 
 {
     unsigned int cases;
     std::cin >> cases;
 
-    char space {' '}; //As a delimiter for cin
-    std::string turns {"TURNS"};
-    std::string in {"IN"};
-    std::string book{"BOOK"};
-    
     std::string absentStudent;
-    int returns {0};
-    std::vector<std::string> presentStudents;
-    std::vector<std::string> booksIn;
+    std::string presentStudent;
+    std::string bookIn;
+    std::string input;
 
+    std::vector<std::string> students;
+    std::vector<std::string> booksIn;
     std::vector<std::string> output;
+    int returns {0};
+
 
     for ( int i {0}; i < cases; i++ )
     {
-        std::string presentStudent;
-        std::string bookIn;
 
         flushCin();
-        std::cin >> absentStudent >> returns;
+        std::getline(std::cin, input);
         
+        absentStudent = input.substr(0, input.find(" "));
+        input.erase(0, input.find(" ") + 1);
+        std::string returnsStr = input.substr(0, input.find(" "));
+        returns = std::stoi(returnsStr);
+        students.push_back(absentStudent);
+
         for ( int i {0}; i < returns; i++ )
         {    
             flushCin();
-            std::cin >> presentStudent >> space >> turns >> space >> in >> space >> presentStudent >> space >> book;
+            std::getline(std::cin, input);
+            //Set up a similar string-splitting system as above to get the present student and the book they're turning in.
             for (int i {0}; i < 2; i++) { bookIn.pop_back(); } //Remove "'s" from the string
         
             booksIn.push_back(bookIn);
-            presentStudents.push_back(presentStudent);
+            students.push_back(presentStudent);
         }   
 
         for ( int i {0}; i < booksIn.size(); i++ ) 
         {
-            for ( int x {0}; x < presentStudents.size(); x++ )
+            for ( int x {0}; x < students.size(); x++ )
             {
-                if ( booksIn.at(i) == presentStudents.at(x) ) 
+                if ( booksIn.at(i) == students.at(x) ) 
                 {
                     booksIn.erase(booksIn.begin() + i);
-                    presentStudents.erase(presentStudents.begin() + x);
-                }
+                    students.erase(students.begin() + x);
+            }
             }
 
         }
 
-        output.push_back(formOutput(absentStudent, presentStudent.at(0)));
+        
+        output.push_back(formOutput(absentStudent, students.at(0)));
     }
 
-
+    for ( int k {0}; k < output.size(); k++ ) 
+    {
+        std::cout << output.at(k);
+        std::cout << "\n";
+    }
 
     return 0;
 }
