@@ -1,11 +1,12 @@
+//Not Working.
 #include <iostream>
 #include <vector>
 #include <string>
 
 void flushCin() 
 {
-std::cin.clear();
-std::cin.ignore(10000, '\n');
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
 }
 std::string formOutput(std::string student, std::string student2) 
 {
