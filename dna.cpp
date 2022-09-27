@@ -15,24 +15,32 @@ int main()
     {
         input = "";
         std::fill_n(inputArr, 100, ' ');
-        
         std::getline(std::cin, input);
-        
         strncpy(inputArr, input.c_str(), sizeof(inputArr)); 
         
         for ( int i {0}; i < input.length(); i++ ) 
             {
-                if ( inputArr[i] == 'A' ) { dna.push_back('T'); }
-                else if ( inputArr[i] == 'T' ) { dna.push_back('A'); }
-                else if ( inputArr[i] == 'C' ) { dna.push_back('G'); }
-                else if ( inputArr[i] == 'G' ) { dna.push_back('C'); }
+                switch (inputArr[i])
+                {
+                case 'A':
+                    dna.push_back('T');
+                    break;
+                case 'T':
+                    dna.push_back('A');
+                    break;
+                case 'C':
+                    dna.push_back('G');
+                    break;
+                case 'G':
+                    dna.push_back('C');
+                    break;
+                
+                default:
+                    break;
+                }
             }
-        dna.push_back('\n');
     }
     
-    for (int i {0}; i < dna.size(); i++ ) 
-    {
-        std::cout << dna[i];
-    }
-
+    for (char i: dna) 
+        { std::cout << i << "\n"; }
 }
