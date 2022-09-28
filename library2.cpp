@@ -1,4 +1,4 @@
-//Working (??)
+//Working!
 //A remaking of the library program.
 #include <map>
 #include <iostream>
@@ -24,38 +24,40 @@ std::vector<std::string> split(std::string &input)
 int main() 
 {
     std::vector<std::string> output;
-    std::map<std::string, bool> m;
     int t;
     std::cin >> t;
     std::cin.ignore(1, '\n');
 
     for (int i = 0; i < t; i++) 
     {
-        std::string input;
+        std::map<std::string, bool> m;
         std::string absentee;
+        std::string returnsS;
         std::string missing;
         int returns;
         
-        std::getline(std::cin, input);
-        std::vector<std::string> inSplit = split(input);
-        
-        absentee = inSplit.at(0);
-        returns = stoi(inSplit.at(1));
+        std::cin >> absentee >> returnsS;
+        returns = stoi(returnsS);
+        m.insert(std::make_pair(absentee, false));
         
         for (int i = 0; i < returns; i++)
         {
-            std::string input2;
-            std::getline(std::cin, input2);
-            std::vector<std::string> inSplit2 = split(input2);
-            inSplit2.at(3).erase(inSplit2.at(3).length() - 2, 2); //Removes "'s" from the input name
-            
-            if (m.find(inSplit2.at(0)) == m.end()) //If the first name doesn't exist in the map
-                { m.insert(std::make_pair(inSplit2.at(0), false)); }
+            std::string buf;
+            std::string student;
+            std::string book;
 
-            if (m.find(inSplit2.at(3)) == m.end()) 
-                { m.insert(std::make_pair(inSplit2.at(3), true)); }
+            //We only care about the student and book being turned in.
+            std::cin >> student >> buf >> buf >> book >> buf; 
+            
+            book.erase(book.length() - 2, 2); //Removes "'s" from the input name
+
+            if (m.find(student) == m.end()) 
+                { m.insert(std::make_pair(student, false)); }
+
+            if (m.find(book) == m.end())
+                { m.insert(std::make_pair(book, true)); }
             else //If the book owner is already in the database
-                { m[inSplit2.at(3)] = true; }
+                { m[book] = true; }
         }
         //Find the only key in the map with value "false"
         for (auto& it : m) 
@@ -64,7 +66,7 @@ int main()
             missing = it.first;
         }
         
-        output.push_back(absentee + " HAS " + missing + "'s BOOK\n"); //Unfinished line
+        output.push_back(absentee + " HAS " + missing + "'s BOOK\n");
     }
 
     for (std::string i : output) 
