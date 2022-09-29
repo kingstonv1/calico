@@ -1,4 +1,4 @@
-//Working, despite what the calico autograder thinks.
+//Not working (autograder)
 //A remaking of the "frames" program.
 #include <iostream>
 #include <string>

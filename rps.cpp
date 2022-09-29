@@ -1,4 +1,4 @@
-//Under Development (Not Working).
+//Not Working (U.D.)
 #include <bits/stdc++.h>
 
 char beats(char c) 
