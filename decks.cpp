@@ -12,7 +12,7 @@ int main()
     std::cin >> t;
 
     for (int i = 0; i < t; i++) 
-    {
+    { 
         long long rows;
         std::cin >> rows;
         out.push_back(std::ceil((rows * (rows + 1) * 0.5 * 3 - rows) / 54));
