@@ -1,3 +1,5 @@
+# Semi-Working || Time Limit
+
 t = int(input())
 
 import time
@@ -11,7 +13,6 @@ def queenMoves(a, x, y):
             if x - i >= 0 and y - i >= 0:
                 a[x - i][y - i] = 'X'
         except IndexError:
-            print("Broken. Index hit " + str(i))
             break
     # Up
     for i in range (1000000):
@@ -19,7 +20,6 @@ def queenMoves(a, x, y):
             if y - i >= 0:
                 a[x][y - i] = 'X'
         except IndexError:
-            print("Broken. Index hit " + str(i))
             break
     # Up Right
     for i in range (1000000):
@@ -27,28 +27,24 @@ def queenMoves(a, x, y):
             if y - i >= 0:
                 a[x + i][y - i] = 'X'
         except IndexError:
-            print("Broken. Index hit " + str(i))
             break
     # Right
     for i in range (1000000):
         try:
             a[x + i][y] = 'X'
         except IndexError:
-            print("Broken. Index hit " + str(i))
             break
     # Down Right
     for i in range (1000000):
         try:
             a[x + i][y + i] = 'X'
         except IndexError:
-            print("Broken. Index hit " + str(i))
             break
     # Down
     for i in range (1000000):
         try:
             a[x][y + i] = 'X'
         except IndexError:
-            print("Broken. Index hit " + str(i))
             break
     # Down Left
     for i in range (1000000):
@@ -56,7 +52,6 @@ def queenMoves(a, x, y):
             if x - i >= 0:
                 a[x - i][y + i] = 'X'
         except IndexError:
-            print("Broken. Index hit " + str(i))
             break
     # Left
     for i in range (1000000):
@@ -64,7 +59,6 @@ def queenMoves(a, x, y):
             if x - i >= 0:
                 a[x - i][y] = 'X'
         except IndexError:
-            print("Broken. Index hit " + str(i))
             break
     
     return a
@@ -105,7 +99,6 @@ def isMate(a, x, y, xm, ym):
     
     return True
 
-
 counts = []
 
 for q in range (t):
@@ -121,9 +114,7 @@ for q in range (t):
     for w in range (dimX):
         boardIn.append(input())
     
-    start = time.time()
     
-        
     board = [['' for i in range(dimY)] for j in range (dimX)]
     attacks = [['' for i in range(dimY)] for j in range (dimX)]
     
@@ -144,8 +135,6 @@ for q in range (t):
                     count += 1
     
     counts.append(count)
-    end = time.time()
-    print("The time to complete the calculations: " + str(end - start))
     input()
 
 for num in counts:
