@@ -1,16 +1,23 @@
-nums = [-1, 0, 1]
+def trib_positive(n, first, second, third, count):
+    if count == n:
+        return third
 
-def trib(count, n):
-    if n == 0:
-        return 0
+    return trib_positive(n, second, third, (first + second + third), count + 1)
+
+
+def trib_negative(n, first, second, third, count):
+    if count == n:
+        return first
     
-    if len(nums) == n + 2:
-        return nums[-1]
-
-    nums.append(nums[count] + nums[count - 1] + nums[count - 2])
-    return trib(count + 1, n)
+    return trib_negative(n, (third - second - first), first, second, count - 1)
 
 
 for _ in range(int(input())):
-    print(trib(2, int(input())))
-    nums = [-1, 0, 1]
+    i = int(input())
+    
+    if i in (0, 1):
+        print(i)
+        continue
+        
+    print(trib_positive(i, -1, 0, 1, 1) if i >= 0 else trib_negative(i, 1, 0, 1, 1))
+    
