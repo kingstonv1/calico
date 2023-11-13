@@ -4,3 +4,4 @@ rps
 *.exe
 *.e
 shortestpath.cpp
+.idea/
