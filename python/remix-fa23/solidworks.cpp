@@ -11,13 +11,13 @@
 
         vector<pair<int, int>> edges(0);
 
-        // transpose the original shape on the new list
+        // place backside of shape
         for (int row = 0; row < h; row++) {
             for (int col = 0; col < w; col++) {
-                ns[row + d + 1][col + d + 1] = sw[row][col];
-
+                ns[row][col] = sw[row][col];
+                
                 if (sw[row][col] == '+') {
-                    edges.push_back(make_pair(row +d + 1, col + d + 1));
+                    edges.push_back(make_pair(row, col));
                 }
             }
         }
@@ -26,25 +26,18 @@
         for (int x = 0; x < edges.size(); x++) {
             for (int i = 1; i < d + 1; i++) {
                 pair<int, int> p = edges[x];
-                char ch = ns[p.first - i][p.second - i];
-                
-                if (ch == '-' || ch == '|' || ch == '+') {
-                    continue;
-                }
-
-                ns[p.first - i][p.second - i] = '\\';
+                ns[p.first + i][p.second + i] = '\\';
             }
         }
 
-        // place backside of shape
+        // transpose the original shape on the new list
         for (int row = 0; row < h; row++) {
             for (int col = 0; col < w; col++) {
-                if (ns[row][col] == ' ') {
-                    ns[row][col] = sw[row][col];
+                if (sw[row][col] != ' ') {
+                    ns[row + d + 1][col + d + 1] = sw[row][col];
                 }
             }
         }
-
 
         // print the vectors
         for (vector<char> v: ns) {
