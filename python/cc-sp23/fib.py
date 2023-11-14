@@ -1,3 +1,6 @@
+import functools
+
+
 def fibonacci(n):
     """
     Returns a list of Fibonacci numbers up to the nth index.
@@ -8,15 +11,16 @@ def fibonacci(n):
     return fib
 
 
-def solve(N, Q):
-    fib = fibonacci(N)
-    zeros = [0 for _ in range(N)]
+fib = fibonacci(10000)
 
+
+def solve(N, Q):
+    zeros = [0 for _ in range(N)]
+    
     for _ in range(Q):
         LR = list(map(int, input().split()))
         L = LR[0]
         R = LR[1]
-
         index = 0
 
         for i in range(L - 1, R):
@@ -35,4 +39,4 @@ for _ in range(int(input())):
     N = NQ[0]
     Q = NQ[1]
 
-    print(" ".join(list(map(str, solve(N, Q)))))
+    print(*solve(N, Q))
