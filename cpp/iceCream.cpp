@@ -16,6 +16,6 @@ int main()
     {
         double N;
         cin >> N;
-        cout << solve(N) << 'n';
+        cout << solve(N) << '\n';
     }
 }
